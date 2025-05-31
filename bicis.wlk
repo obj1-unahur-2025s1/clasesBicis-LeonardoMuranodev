@@ -5,6 +5,18 @@ class Bici {
   const property marca
   const property accesorios = #{}
 
+  method initialize() {
+    if (marca.kindName() != "a String") {
+      self.error("el atributo marca debe ser un string con el nombre de la marca")
+    }
+    if (!rodado.between(1, 100)) {
+      self.error("Rodado debe ser un numero valido")
+    }
+    if (!largo.between(1, 100)) {
+      self.error("largo debe ser un numero valido")
+    }
+  }
+
   //Metodos de consulta
   method altura() = rodado * 2.5 + 15
   method velCrucero() = if (largo > 120) rodado + 6 else rodado + 2
@@ -20,9 +32,13 @@ class Bici {
 
   method mismaMarca(unaBici) = self.marca() == unaBici.marca()
   method tieneLargoParecido(unaBici) = self.largo().between(unaBici.largo() - 10, unaBici.largo() + 10)
+
   //Metodos de indicacion
-  method agregarAccesorios(accesorio) {
-    accesorios.addAll(accesorio)
+  method agregarAccesorios(listaAccesorio) {
+    if (listaAccesorio.any({a =>a.kindName() != "a Farolito" || a.kindName() != "a Morral" || a.kindName() != "a Canasto"})) {
+      throw new Exception(message="Debes agregar accesorios validos")
+    }
+    accesorios.addAll(listaAccesorio)
   }
 
   method quitarAccesorio(accesorio) {
@@ -59,6 +75,10 @@ class Morral {
   method initialize() {
     if (not largo.between(1,200)) {
       self.error(largo.toString() + "No es un valor entre 1 y 200")
+    }
+
+    if (tieneOjoDeGato.kindName() != "a Boolean") {
+      self.error("tieneOjoDeGato debe ser un atributo booleano")
     }
   }
 
