@@ -14,14 +14,14 @@ class Bici {
 
   method pesoAccesorios() = accesorios.sum({accesorio => accesorio.peso()})
 
-  method cantAccesoriosLivianos() = accesorios.count({acc => acc.peso < 1})
+  method cantAccesoriosLivianos() = accesorios.count({acc => acc.peso() < 1})
 
   method esCompañeraDe(unaBici) = unaBici != self && self.mismaMarca(unaBici) && self.tieneLargoParecido(unaBici)
-  
+
   method mismaMarca(unaBici) = self.marca() == unaBici.marca()
   method tieneLargoParecido(unaBici) = self.largo().between(unaBici.largo() - 10, unaBici.largo() + 10)
   //Metodos de indicacion
-  method agregarAccesorioz(accesorio) {
+  method agregarAccesorios(accesorio) {
     accesorios.addAll(accesorio)
   }
 
@@ -31,7 +31,6 @@ class Bici {
 }
 
 //Accesorios
-
 class Farolito {
   method peso() = 0.5
   method carga() = 0
@@ -61,13 +60,12 @@ class Morral {
     if (not largo.between(1,200)) {
       self.error(largo.toString() + "No es un valor entre 1 y 200")
     }
-
-    if (not tieneOjoDeGato || tieneOjoDeGato) {
-      self.error("tieneOjoDeGato debe ser un valor Booleano")
-    }
   }
 
   method peso() = 1.2
   method carga() = largo / 3
   method esLuminoso() = tieneOjoDeGato
 }
+
+/*Para agregar accesorios basta con agregar la clase del mismo, con los metodos
+peso(), carga(), y esLuminoso() como requiridos si o si.*/

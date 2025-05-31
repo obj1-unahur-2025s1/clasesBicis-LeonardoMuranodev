@@ -2,95 +2,137 @@ import bicis.*
 import depositos.*
 
 describe "Test de la parte 1"{
+  //Bicicletas
+  const bici1 = new Bici(rodado=28,largo=150,marca="Olmo")
+  const bici2 = new Bici(rodado=26,largo=110,marca="Legnano")
+  const bici3 = new Bici(rodado=20,largo=90,marca="Legnano")
 
-    //Bicicletas
-    const bici1 = new Bici(rodado=28,largo=150,marca="Olmo")
-    const bici2 = new Bici(rodado=26,largo=110,marca="Legnano")
-    const bici3 = new Bici(rodado=20,largo=90,marca="Legnano")
+  //Accesorios
+  const farolito = new Farolito()
+  const canasto = new Canasto(volumen=8)
+  const morral21 = new Morral(largo=21, tieneOjoDeGato=true)
+  const morral6 = new Morral(largo=6, tieneOjoDeGato=false)
 
-    //Accesorios
-    farolito = new Farolito()
-    canasto = new Canasto(volumen=8)
-    morral21 = new Morral(largo=21, tieneOjoDeGato=true)
-    morral6 = new Morral(largo=6, tieneOjoDeGato=false)
+  method initialize() {
+    bici1.agregarAccesorios([farolito])
+    bici2.agregarAccesorios([farolito, canasto, morral21])
+    bici3.agregarAccesorios([morral6])
+  }
 
-    method initialize {
-        bici1.agregarAccesorios([farolito])
-        bici2.agregarAccesorios([farolito, canasto, morral21])
-        bici3.agregarAccesorios([morral6])
-    }
+  test "La bici1 tiene altura 85, velocidad crucero 34, carga 0, peso 14.5, tiene
+  luz y tiene un accesorio liviano"{
+    assert.equals(85, bici1.altura())
+    assert.equals(34, bici1.velCrucero())
+    assert.equals(0, bici1.carga())
+    assert.equals(14.5, bici1.peso())
+    assert.that(bici1.tieneLuz())
+    assert.equals(1, bici1.cantAccesoriosLivianos())
+  }
 
-    test "LA bici1 tiene altura 85, velocidad crucero 34, carga 0, peso 14.5, tiene
-    luz y tiene un accesorio liviano" {
-        assert.equals(85, bici1.altura())
-        assert.equals(34, bici1.velCrucero())
-        assert.equals(0, bici1.carga())
-        assert.equals(14.5, bici1.peso())
-        assert.that(bici1.tieneLuz())
-        assert.equals(1, bici1.cantAccesoriosLivianos())
-    }
+  test "La bici2 tiene altura 80, velocidad crucero 28, carga 23, peso 15.5, tiene
+  luz y tiene dos accesorios livianos" {
+    assert.equals(80, bici2.altura())
+    assert.equals(28, bici2.velCrucero())
+    assert.equals(23, bici2.carga())
+    assert.equals(15.5, bici2.peso())
+    assert.that(bici2.tieneLuz())
+    assert.equals(2, bici2.cantAccesoriosLivianos())
+  }
 
-    test "LA bici2 tiene altura 80, velocidad crucero 28, carga 23, peso 15.5, tiene
-    luz y tiene dos accesorios livianos" {
-        assert.equals(80, bici2.altura())
-        assert.equals(28, bici2.velCrucero())
-        assert.equals(23, bici2.carga())
-        assert.equals(15.5, bici2.peso())
-        assert.that(bici2.tieneLuz())
-        assert.equals(2, bici2.cantAccesoriosLivianos())
-    }
-
-    test "LA bici3 tiene altura 65, velocidad crucero 22, carga 2, peso 11.2, no 
-    tiene luz y no tiene dos  livianos" {
-        assert.equals(65, bici3.altura())
-        assert.equals(22, bici3.velCrucero())
-        assert.equals(2, bici3.carga())
-        assert.equals(11.2, bici3.peso())
-        assert.notThat(bici3.tieneLuz())
-        assert.equals(0, bici3.cantAccesoriosLivianos())
-    }
+  test "LA bici3 tiene altura 65, velocidad crucero 22, carga 2, peso 11.2, no 
+  tiene luz y no tiene dos  livianos" {
+    assert.equals(65, bici3.altura())
+    assert.equals(22, bici3.velCrucero())
+    assert.equals(2, bici3.carga())
+    assert.equals(11.2, bici3.peso())
+    assert.notThat(bici3.tieneLuz())
+    assert.equals(0, bici3.cantAccesoriosLivianos())
+  }
 }
 
 describe "test de la parte 2" {
-    //Bicicletas
-    const bici1 = new Bici(rodado=28,largo=150,marca="Olmo")
-    const bici2 = new Bici(rodado=26,largo=110,marca="Legnano")
-    const bici3 = new Bici(rodado=20,largo=90,marca="Legnano")
+  
+  //Bicicletas
+  const bici1 = new Bici(rodado=28,largo=150,marca="Olmo")
+  const bici2 = new Bici(rodado=26,largo=110,marca="Legnano")
+  const bici3 = new Bici(rodado=20,largo=90,marca="Legnano")
 
-    //Accesorios
-    const farolito = new Farolito()
-    const canasto = new Canasto(volumen=8)
-    const morral21 = new Morral(largo=21, tieneOjoDeGato=true)
-    const morral6 = new Morral(largo=6, tieneOjoDeGato=false)
+  //Accesorios
+  const farolito = new Farolito()
+  const canasto = new Canasto(volumen=8)
+  const morral21 = new Morral(largo=21, tieneOjoDeGato=true)
+  const morral6 = new Morral(largo=6, tieneOjoDeGato=false)
 
-    //Depositos
-    const deposito1 = new Deposito()
-    const deposito2 = new Deposito()
+  //Depositos
+  const deposito1 = new Deposito()
+  const deposito2 = new Deposito()
 
-    method initialize {
-        bici1.agregarAccesorios([farolito])
-        bici2.agregarAccesorios([farolito, canasto, morral21])
-        bici3.agregarAccesorios([morral6])
+  method initialize() {
+    bici1.agregarAccesorios([farolito])
+    bici2.agregarAccesorios([farolito, canasto, morral21])
+    bici3.agregarAccesorios([morral6])
 
-        deposito1.agregarBicis([bici1, bici2, bici3])
-        deposito2.agregarBicis([bici1, bici2])
-    }
+    deposito1.agregarBicis([bici1, bici2, bici3])
+    deposito2.agregarBicis([bici1, bici2])
+  }
 
-    test "Deposito 1: las bicis rapidas son la bici1 y bici2, las marcas son 
-    Olmo y Legnano, el deposito no es nocturno. Tiene bici para llevar 10 KG,
-    pero no para 50KG" {
-        assert.equals([bici1, bici2], deposito1.bicisRapidas())
-        assert.equals(#{"Olmo", "Legnano"}, deposito1.marcas())
-        assert.notThat(deposito1.esNocturno())
-        assert.that(deposito1.algunaBiciPuedeLLevar(10))
-        assert.notThat(deposito1.algunaBiciPuedeLLevar(50))
-    }
+  test "Deposito 1: las bicis rapidas son la bici1 y bici2, las marcas son 
+  Olmo y Legnano, el deposito no es nocturno. Tiene bici para llevar 10 KG,
+  pero no para 50KG" {
+    assert.equals([bici1, bici2], deposito1.bicisRapidas())
+    assert.equals(#{"Olmo", "Legnano"}, deposito1.conjuntoDeMarcas())
+    assert.notThat(deposito1.esNocturno())
+    assert.that(deposito1.algunaBiciPuedeLLevar(10))
+    assert.notThat(deposito1.algunaBiciPuedeLLevar(50))
+  }
 
-    test "Deposito 2: es igual al deposito1, pero si es nocturno" {
-        assert.equals([bici1, bici2], deposito2.bicisRapidas())
-        assert.equals(#{"Olmo", "Legnano"}, deposito2.marcas())
-        assert.that(deposito2.esNocturno())
-        assert.that(deposito2.algunaBiciPuedeLLevar(10))
-        assert.notThat(deposito2.algunaBiciPuedeLLevar(50))
-    }
+  test "Deposito 2: es igual al deposito1, pero si es nocturno" {
+    assert.equals([bici1, bici2], deposito2.bicisRapidas())
+    assert.equals(#{"Olmo", "Legnano"}, deposito2.conjuntoDeMarcas())
+    assert.that(deposito2.esNocturno())
+    assert.that(deposito2.algunaBiciPuedeLLevar(10))
+    assert.notThat(deposito2.algunaBiciPuedeLLevar(50))
+  }
+}
+
+describe "test de los desafios extras" {
+  
+  //Bicicletas
+  const bici1 = new Bici(rodado=28,largo=150,marca="Olmo")
+  const bici2 = new Bici(rodado=26,largo=110,marca="Legnano")
+  const bici3 = new Bici(rodado=20,largo=105,marca="Legnano")
+  const bici4 = new Bici(rodado=28,largo=160,marca="Olmo")
+
+  //Accesorios
+  const farolito = new Farolito()
+  const canasto = new Canasto(volumen=8)
+  const morral21 = new Morral(largo=21, tieneOjoDeGato=true)
+  const morral6 = new Morral(largo=6, tieneOjoDeGato=false)
+
+  //Depositos
+  const deposito1 = new Deposito()
+  const deposito2 = new Deposito()
+  const deposito3 = new Deposito()
+
+  method initialize() {
+    bici2.agregarAccesorios([farolito, canasto, morral21])
+    bici3.agregarAccesorios([farolito, morral6])
+
+    deposito1.agregarBicis([bici1, bici2, bici3])
+    deposito2.agregarBicis([bici1, bici2, bici4])
+    deposito3.agregarBicis([bici1, bici2, bici3, bici4])
+  }
+
+  test "En el deposito 1 si se hizo la luz, pero en el deposito 2 no. En el deposito 3 tampoco" {
+    assert.that(deposito1.seHizoLaLuz())
+    assert.notThat(deposito2.seHizoLaLuz())
+    assert.notThat(deposito3.seHizoLaLuz())
+  }
+
+  test "Deposito 1: pares de bicicletas compañeras (bici2 y bici3), Deposito 2: pares de bicicletas compañeras (bici1 y bici4)
+  Deposito 3: pares de bicicletas compañeras {(bici1 y bici4) (bici2 y bici3)}" {
+    assert.equals(#{#{bici2, bici3}}, deposito1.paresDeCompañeras())
+    assert.equals(#{#{bici1, bici4}}, deposito2.paresDeCompañeras())
+    assert.equals(#{#{bici1, bici4}, #{bici2, bici3}}, deposito3.paresDeCompañeras())
+  }
 }
