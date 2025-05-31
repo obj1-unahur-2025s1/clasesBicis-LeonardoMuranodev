@@ -9,7 +9,14 @@ class Deposito {
     method esNocturno() = bicis.all({bici => bici.tieneLuz()})
     method algunaBiciPuedeLLevar(cargaEnKG) = bicis.any({bici => bici.carga() > cargaEnKG})
 
-    
+    //Mas sobre el deposito
+    method marcaDeBiciMasRapido() = bicis.max({bici => bici.velCrucero()}).marca()
+    method bicisLargas() = bicis.filter({bici => bici.largo() > 170})
+    method cargaDeBicisLargas() = self.bicisLargas().sum({bici => bici.carga()})
+    method cantBicisSinAccesorios() = bicis.count({bici => bici.accesorios().isEmpty()})
+
+    //Bici compañera
+    method compañerasDe(unaBici) = bicis.filter({b => b.esCompañeraDe(unaBici)})
 
     //Metodos de indicacion
     method agregarBicis(listaBicis) {

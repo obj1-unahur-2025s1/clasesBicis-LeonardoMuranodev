@@ -16,6 +16,10 @@ class Bici {
 
   method cantAccesoriosLivianos() = accesorios.count({acc => acc.peso < 1})
 
+  method esCompañeraDe(unaBici) = unaBici != self && self.mismaMarca(unaBici) && self.tieneLargoParecido(unaBici)
+  
+  method mismaMarca(unaBici) = self.marca() == unaBici.marca()
+  method tieneLargoParecido(unaBici) = self.largo().between(unaBici.largo() - 10, unaBici.largo() + 10)
   //Metodos de indicacion
   method agregarAccesorioz(accesorio) {
     accesorios.addAll(accesorio)
