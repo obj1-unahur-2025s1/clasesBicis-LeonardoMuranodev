@@ -1,7 +1,8 @@
 import bicis.*
+import depositos.*
 
-describe {
-    
+describe "Test de la parte 1"{
+
     //Bicicletas
     const bici1 = new Bici(rodado=28,largo=150,marca="Olmo")
     const bici2 = new Bici(rodado=26,largo=110,marca="Legnano")
@@ -47,5 +48,49 @@ describe {
         assert.equals(11.2, bici3.peso())
         assert.notThat(bici3.tieneLuz())
         assert.equals(0, bici3.cantAccesoriosLivianos())
+    }
+}
+
+describe "test de la parte 2" {
+    //Bicicletas
+    const bici1 = new Bici(rodado=28,largo=150,marca="Olmo")
+    const bici2 = new Bici(rodado=26,largo=110,marca="Legnano")
+    const bici3 = new Bici(rodado=20,largo=90,marca="Legnano")
+
+    //Accesorios
+    const farolito = new Farolito()
+    const canasto = new Canasto(volumen=8)
+    const morral21 = new Morral(largo=21, tieneOjoDeGato=true)
+    const morral6 = new Morral(largo=6, tieneOjoDeGato=false)
+
+    //Depositos
+    const deposito1 = new Deposito()
+    const deposito2 = new Deposito()
+
+    method initialize {
+        bici1.agregarAccesorios([farolito])
+        bici2.agregarAccesorios([farolito, canasto, morral21])
+        bici3.agregarAccesorios([morral6])
+
+        deposito1.agregarBicis([bici1, bici2, bici3])
+        deposito2.agregarBicis([bici1, bici2])
+    }
+
+    test "Deposito 1: las bicis rapidas son la bici1 y bici2, las marcas son 
+    Olmo y Legnano, el deposito no es nocturno. Tiene bici para llevar 10 KG,
+    pero no para 50KG" {
+        assert.equals([bici1, bici2], deposito1.bicisRapidas())
+        assert.equals(#{"Olmo", "Legnano"}, deposito1.marcas())
+        assert.notThat(deposito1.esNocturno())
+        assert.that(deposito1.algunaBiciPuedeLLevar(10))
+        assert.notThat(deposito1.algunaBiciPuedeLLevar(50))
+    }
+
+    test "Deposito 2: es igual al deposito1, pero si es nocturno" {
+        assert.equals([bici1, bici2], deposito2.bicisRapidas())
+        assert.equals(#{"Olmo", "Legnano"}, deposito2.marcas())
+        assert.that(deposito2.esNocturno())
+        assert.that(deposito2.algunaBiciPuedeLLevar(10))
+        assert.notThat(deposito2.algunaBiciPuedeLLevar(50))
     }
 }

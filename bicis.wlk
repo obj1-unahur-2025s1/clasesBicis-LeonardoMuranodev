@@ -1,9 +1,9 @@
 class Bici {
   //Atributo
-  const property rodado
+  const rodado
   const property largo
   const property marca
-  const accesorios = #{}
+  const property accesorios = #{}
 
   //Metodos de consulta
   method altura() = rodado * 2.5 + 15
@@ -37,6 +37,12 @@ class Farolito {
 class Canasto {
   const volumen
 
+  method initialize() {
+    if (not volumen.between(1,20)) {
+      self.error(volumen.toString() + "No es un valor entre 1 y 20")
+    }
+  }
+
   method peso() = volumen / 10
   method carga() = volumen * 2
   method esLuminoso() = false
@@ -45,6 +51,17 @@ class Canasto {
 class Morral {
   const largo
   const tieneOjoDeGato
+
+  //El initialize lo entienden las clases y sirve para, a la hora de instanciar arrojar excepciones
+  method initialize() {
+    if (not largo.between(1,200)) {
+      self.error(largo.toString() + "No es un valor entre 1 y 200")
+    }
+
+    if (not tieneOjoDeGato || tieneOjoDeGato) {
+      self.error("tieneOjoDeGato debe ser un valor Booleano")
+    }
+  }
 
   method peso() = 1.2
   method carga() = largo / 3
